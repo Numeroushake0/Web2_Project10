@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Quotes Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'quotes/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'quote_list' %}">Quotes Site</a></h1>
+        <nav>
+            {% if user.is_authenticated %}
+                Hello, {{ user.username }} | <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Quotes Site</p>
+    </footer>
+</body>
+</html>

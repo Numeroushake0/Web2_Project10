@@ -1,0 +1,18 @@
+{% extends 'quotes/base.html' %}
+
+{% block title %}Quote Detail{% endblock %}
+
+{% block content %}
+<h2>Quote Detail</h2>
+
+<p>{{ object.text }}</p>
+<p>— {{ object.author.name }}</p>
+<p>
+    Tags: 
+    {% for tag in object.tags.all %}
+        <a href="{% url 'quotes_by_tag' tag.name %}">{{ tag.name }}</a>
+    {% endfor %}
+</p>
+
+<a href="{% url 'quote_list' %}">Back to list</a>
+{% endblock %}

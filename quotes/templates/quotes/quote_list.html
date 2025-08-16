@@ -1,0 +1,38 @@
+{% extends 'quotes/base.html' %}
+
+{% block title %}Quotes List{% endblock %}
+
+{% block content %}
+<h2>All Quotes</h2>
+
+<div class="quotes">
+    {% for quote in object_list %}
+        <div class="quote">
+            <p>{{ quote.text }}</p>
+            <p>— <a href="#">{{ quote.author.name }}</a></p>
+            <p>
+                {% for tag in quote.tags.all %}
+                    <a href="{% url 'quotes_by_tag' tag.name %}">{{ tag.name }}</a>
+                {% endfor %}
+            </p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+<h3>Top Ten Tags</h3>
+<ul>
+    {% for tag in top_tags %}
+        <li><a href="{% url 'quotes_by_tag' tag.name %}">{{ tag.name }} ({{ tag.count }})</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
