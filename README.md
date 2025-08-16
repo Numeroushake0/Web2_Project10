@@ -1,1 +1,1 @@
-# Web2_Projec10
+# Web2_Project10 - Django Quotes Site
